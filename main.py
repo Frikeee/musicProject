@@ -6,6 +6,9 @@ import wave
 import matplotlib.pyplot as plt
 import librosa
 import librosa.display
+from tkinter import *
+from tkinter import filedialog as fd
+import tkinter as tk
 
 # D = []
 # Deci = []
@@ -212,7 +215,24 @@ import librosa.display
 #         break
 # else: print("Такой доверительности не существует")
 
+mainWindow = Tk()
+mainWindow['bg'] = '#fafafa'
+mainWindow.title ('Подсчёт доверительной вероятности')
+mainWindow.geometry('800x600')
+mainWindow.resizable(width=False, height=False)
 file = '75.wav'
+def callback():
+    name= fd.askopenfilename()
+    file = name
+    print(name)
+
+errmsg = 'Error!'
+tk.Button(text='Click to Open File',
+       command=callback).pack(fill=tk.X)
+tk.mainloop()
+mainWindow.mainloop()
+
+
 y, sr = librosa.load(file)
 fig, ax = plt.subplots(nrows=1, sharex=True, sharey=True)
 librosa.display.waveshow(y, sr=sr, ax=ax)
